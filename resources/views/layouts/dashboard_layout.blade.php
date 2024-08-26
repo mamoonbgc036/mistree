@@ -39,7 +39,7 @@
                         </path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
-                    <span class="link-title">Product</span>
+                    <span class="link-title">Service</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-chevron-down link-arrow">
@@ -49,12 +49,8 @@
                 <div class="collapse" id="emails">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <router-link to="/user/product/create" class="nav-link">Create Product</router-link>
+                            <a href="{{ route('service') }}" class="nav-link">All Services</a>
                         </li>
-                        <li class="nav-item">
-                            <router-link to="/user/product/index" class="nav-link">All Product</router-link>
-                        </li>
-
                     </ul>
                 </div>
             </li>
@@ -411,12 +407,12 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="wd-30 ht-30 rounded-circle" src="user.image" alt="profile">
+                        <img class="wd-30 ht-30 rounded-circle" src="" alt="profile">
                     </a>
                     <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
                         <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
                             <div class="mb-3">
-                                <img class="wd-80 ht-80 rounded-circle" src="user.image" alt="">
+                                <img class="wd-80 ht-80 rounded-circle" src="" alt="">
                             </div>
                             <div class="text-center">
                                 <p class="tx-16 fw-bolder">mamoon</p>

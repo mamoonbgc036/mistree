@@ -12,11 +12,10 @@ return new class extends Migration {
     {
         Schema::create('thanas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('bn_name');
-            $table->foreignId('division_id')->constrained('divisions')->onDelete('cascade');
-            $table->foreignId('district_id')->constrained('districts')->onDelete('cascade');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('thananamebn');
+            $table->string('thananameen');
+            $table->string('dmpdivisionid');
+            $table->string('districtid');
             $table->timestamps();
         });
     }

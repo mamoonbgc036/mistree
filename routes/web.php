@@ -4,6 +4,8 @@ use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\auth\SessionController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Service\CategoryController;
+use App\Http\Controllers\Service\ServiceAreaController;
+use App\Http\Controllers\Service\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +23,7 @@ Route::get('/', function () {
     return view('sessions.login');
 });
 
-// Backend
+// http://127.0.0.1:8000/dashboard/service/create 
 
 Route::get('login', [SessionController::class, 'login'])->name('login');
 Route::post('login', [SessionController::class, 'store']);
@@ -32,10 +34,23 @@ Route::post('register', [RegisterController::class, 'store']);
 
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('', [DashboardController::class, 'index'])->name('dashboard');
+
+    //category http://127.0.0.1:8000/dashboard/service/create
     Route::get('category', [CategoryController::class, 'index'])->name('category');
     Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('category', [CategoryController::class, 'store']);
     Route::delete('category/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
     Route::get('category/{ServiceCategory}/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::put('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+
+    // service
+    Route::get('service', [ServiceController::class, 'index'])->name('service');
+    Route::get('service/edit/{id}', [ServiceController::class, 'edit'])->name('service.edit');
+    Route::patch('service/edit/{id}', [ServiceController::class, 'update']);
+    Route::get('service/create', [ServiceController::class, 'create'])->name('service.create');
+    Route::post('service/create', [ServiceController::class, 'store']);
+
+
+    Route::get('get-thanas/{id}', [ServiceAreaController::class, 'index'])->name('get-thana');
+
 });
