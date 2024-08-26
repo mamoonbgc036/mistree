@@ -54,6 +54,8 @@
         }
     </style>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css">
+
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
@@ -72,55 +74,54 @@
 
     <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
         rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.css">
 </head>
 
 <body>
     <div class="main-wrapper">
         @yield('content')
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
+
     <!-- <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script> -->
     <!-- <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>
     <script>
+        Dropzone.autoDiscover = false; // Prevent auto-discovery
+
+        var myDropzone = new Dropzone("#mamoon420", {
+            url: '{{ route('service.create') }}',
+            maxFilesize: 2, // MB
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            autoProcessQueue: false, // Prevent auto upload
+            addRemoveLinks: true,
+            init: function () {
+                var dropzoneInstance = this;
+
+                document.querySelector("#my-dropzone").addEventListener("submit", function (e) {
+                    e.preventDefault();
+
+                    // Manually add form data (email and password) to Dropzone files
+                    dropzoneInstance.on("sending", function (file, xhr, formData) {
+                        formData.append("email", document.querySelector("#email").value);
+                        formData.append("password", document.querySelector("#password").value);
+                    });
+
+                    // Process the Dropzone queue
+                    dropzoneInstance.processQueue();
+                });
+
+                // Success handling
+                dropzoneInstance.on("success", function (file, response) {
+                    console.log("File uploaded successfully", response);
+                });
+
+                // Error handling
+                dropzoneInstance.on("error", function (file, response) {
+                    console.log("Error uploading file", response);
+                });
+            }
+        });
         $(document).ready(function () {
-            Dropzone.autoDiscover = false; // Prevent auto-discovery
-
-            var myDropzone = new Dropzone("#file-dropzone", {
-                url: '{{ route('service.create') }}',
-                maxFilesize: 2, // MB
-                acceptedFiles: ".jpeg,.jpg,.png,.gif",
-                autoProcessQueue: false, // Prevent auto upload
-                addRemoveLinks: true,
-                init: function () {
-                    var dropzoneInstance = this;
-
-                    document.querySelector("#my-dropzone").addEventListener("submit", function (e) {
-                        e.preventDefault();
-
-                        // Manually add form data (email and password) to Dropzone files
-                        dropzoneInstance.on("sending", function (file, xhr, formData) {
-                            formData.append("email", document.querySelector("#email").value);
-                            formData.append("password", document.querySelector("#password").value);
-                        });
-
-                        // Process the Dropzone queue
-                        dropzoneInstance.processQueue();
-                    });
-
-                    // Success handling
-                    dropzoneInstance.on("success", function (file, response) {
-                        console.log("File uploaded successfully", response);
-                    });
-
-                    // Error handling
-                    dropzoneInstance.on("error", function (file, response) {
-                        console.log("Error uploading file", response);
-                    });
-                }
-            });
-
             $('.delete-category').on('click', function (event) {
                 event.preventDefault();
                 let id = $(this).data('id');
@@ -171,13 +172,13 @@
             //     searchEnabled: false
             // });
 
-            var thanaSelect = new Choices('#example-multiselect', {
-                removeItemButton: true,
-                placeholderValue: 'Example placeholder',
-                searchPlaceholderValue: null,
-                placeholder: '',
-                searchEnabled: false
-            });
+            // var thanaSelect = new Choices('#example-multiselect', {
+            //     removeItemButton: true,
+            //     placeholderValue: 'Example placeholder',
+            //     searchPlaceholderValue: null,
+            //     placeholder: '',
+            //     searchEnabled: false
+            // });
 
             $('#selected_district').change(function () {
                 let district_id = $(this).val();

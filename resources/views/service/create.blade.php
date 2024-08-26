@@ -1,11 +1,29 @@
 @extends('layouts.dashboard_layout')
 @section('dashboard')
+<style>
+    .dz-preview {
+        position: static !important;
+    }
+
+    .dz-remove {
+        display: block !important;
+    }
+
+    .dropzone .dz-preview .dz-remove {
+        text-align: left !important;
+    }
+
+    #mamoon420 {
+        display: flex !important;
+    }
+</style>
 <div class="row">
     <div class="col-md-12 stretch-card">
         <div class="card">
             <div class="card-body">
                 <h6 class="card-title text-center">Service Create</h6>
-                <form enctype="multipart/form-data" action="{{ route('service.create') }}" method="POST">
+                <form enctype="multipart/form-data" action="{{ route('service.create') }}" id="my-dropzone"
+                    method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-sm-6">
@@ -144,13 +162,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <label class="form-label">Select Image</label>
-                            <input type="file" class="filepond" name="filepond[]" multiple data-allow-reorder="true"
-                                data-max-file-size="3MB" data-max-files="3">
-                            @error('image')
-                            <p class="text-danger">{{ $message }}</p>
-                            @enderror
+                        <div class="form-group mb-3">
+                            <label for="file">Upload Files:</label>
+                            <div class="dropzone" id="mamoon420"></div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Create Service</button>
