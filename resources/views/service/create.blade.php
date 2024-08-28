@@ -161,12 +161,15 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group mb-3">
-                            <label for="file">Upload Files:</label>
-                            <div class="dropzone" id="mamoon420"></div>
-                        </div>
+
+                    <div class="upload-container">
+                        <input type="file" id="file-input" name="images[]" accept="image/*" multiple />
+                        <label for="file-input" class="upload-label">
+                            <span>Drag & Drop images here or click to select</span>
+                        </label>
+                        <div id="previews" class="preview-container"></div>
                     </div>
+
                     <button type="submit" class="btn btn-primary mt-2">Create Service</button>
                 </form>
             </div>

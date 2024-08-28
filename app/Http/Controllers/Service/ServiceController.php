@@ -45,6 +45,7 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         //remove disguse input field search_term from the request
         foreach ($request->file('filepond') as $file) {
             $path = $file->store('service', 'public');
