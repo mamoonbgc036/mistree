@@ -51,5 +51,40 @@
             { data: 'action', name: 'action' },
         ]
     });
+
+    $(document).on('click', '.service-delete', function (e) {
+        e.preventDefault();
+        let $btn = $(this);
+        let id = $(this).data('id');
+        let url = "{{ route('service.delete', ':id') }}";
+        let service_del_url = url.replace(':id', id);
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            text: 'You would not be able revert back',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(result => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: service_del_url,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function (response) {
+                        $btn.closest('tr').remove();
+                        Swal.fire({
+                            title: 'Deleted',
+                            text: 'Your Service has been deleted',
+                            icon: 'success',
+                        })
+                    }
+                })
+            }
+        })
+    });
 </script>
 @endsection

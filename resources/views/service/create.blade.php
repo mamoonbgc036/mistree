@@ -169,7 +169,6 @@
                         </label>
                         <div id="previews" class="preview-container"></div>
                     </div>
-
                     <button type="submit" class="btn btn-primary mt-2">Create Service</button>
                 </form>
             </div>

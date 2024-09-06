@@ -49,6 +49,30 @@
             background-color: #0C1427 !important;
         }
 
+        .preview-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .preview-item {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .preview-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            display: block;
+            color: red;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
         .upload-container {
             position: relative;
             width: 100%;
@@ -73,20 +97,20 @@
             text-align: center;
         }
 
-        .preview-container {
+        /* .preview-container {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 20px;
             width: 100%;
-        }
+        } */
 
-        .preview-image {
+        /* .preview-image {
             max-width: 100px;
             max-height: 100px;
             border: 1px solid #ddd;
             border-radius: 4px;
-        }
+        } */
     </style>
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}">
@@ -115,19 +139,42 @@
             $('#file-input').on('change', function (event) {
                 const files = event.target.files;
 
+                // Loop through the selected files
                 for (let i = 0; i < files.length; i++) {
-                    selectedFiles.items.add(files[i]); // Add files to DataTransfer object
+                    const fileIndex = selectedFiles.items.length; // Get the current length of selectedFiles
 
+                    // Add the file to the DataTransfer object
+                    selectedFiles.items.add(files[i]);
+
+                    // Create a new FileReader to read and display the image
                     const reader = new FileReader();
                     reader.onload = function (e) {
+                        // Create an image element with the file's data
                         const img = $('<img>').attr('src', e.target.result).addClass('preview-image');
-                        $('#previews').append(img);
+                        // Create a remove link
+                        const removeLink = $('<span>').text('Remove Image').addClass('remove-image').data('index', fileIndex);
+
+                        // Append the image and remove link to the preview container
+                        const previewDiv = $('<div>').addClass('preview-item').append(img).append(removeLink);
+                        $('#previews').append(previewDiv);
                     };
-                    reader.readAsDataURL(files[i]);
+                    reader.readAsDataURL(files[i]); // Read the image as a Data URL
                 }
 
-                // Update the file input's files property with selected files
+                // Update the file input's files property with the newly added files
                 this.files = selectedFiles.files;
+            });
+
+            // Event delegation for dynamically added "Remove Image" links
+            $('#previews').on('click', '.remove-image', function () {
+                const fileIndex = $(this).data('index'); // Get the file index to remove
+                $(this).parent().remove(); // Remove the preview div
+
+                // Remove the file from the DataTransfer object
+                selectedFiles.items.remove(fileIndex);
+
+                // Update the file input's files property
+                $('#file-input')[0].files = selectedFiles.files;
             });
         });
         $(document).ready(function () {

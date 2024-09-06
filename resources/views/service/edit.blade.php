@@ -149,14 +149,12 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label class="form-label">Select Image</label>
-                            <input type="file" class="form-control" name="image[]" multiple>
-                            @error('image')
-                            <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                        </div>
+                    <div class="upload-container">
+                        <input type="file" id="file-input" name="images[]" accept="image/*" multiple />
+                        <label for="file-input" class="upload-label">
+                            <span>Drag & Drop images here or click to select</span>
+                        </label>
+                        <div id="previews" class="preview-container"></div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Create Category</button>
                 </form>

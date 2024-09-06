@@ -49,6 +49,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::patch('service/edit/{id}', [ServiceController::class, 'update']);
     Route::get('service/create', [ServiceController::class, 'create'])->name('service.create');
     Route::post('service/create', [ServiceController::class, 'store']);
+    Route::delete('service/{id}', [ServiceController::class, 'destroy'])->name('service.delete');
 
 
     Route::get('get-thanas/{id}', [ServiceAreaController::class, 'index'])->name('get-thana');
