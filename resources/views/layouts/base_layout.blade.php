@@ -81,14 +81,13 @@
             background-color: #0C1427;
             padding: 20px;
             display: flex;
-            flex-direction: column;
             align-items: center;
         }
 
         .upload-label {
             position: absolute;
             width: 100%;
-            height: 100%;
+            height: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -97,20 +96,9 @@
             text-align: center;
         }
 
-        /* .preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-            width: 100%;
-        } */
-
-        /* .preview-image {
-            max-width: 100px;
-            max-height: 100px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        } */
+        #file-input {
+            display: none;
+        }
     </style>
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}">
@@ -133,12 +121,40 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <script>
+        // $(document).ready(function () {
+        //     // Add an existing image on page load
+        //     const existingImageUrl = 'http://127.0.0.1:8000/storage/service/rrKdq0LetxgoUXF1nGxEQAO7RzNtDz0FoGx2wmue.png';
+        //     const img = $('<img>').attr('src', existingImageUrl).addClass('preview-image');
+        //     const removeLink = $('<span>').text('Remove Image').addClass('remove-image').data('index', 0); // Set index to 0 for first image
+
+        //     const previewDiv = $('<div>').addClass('preview-item').append(img).append(removeLink);
+        //     $('#previews').append(previewDiv);
+
+        //     // You can also push the existing image into selectedFiles if needed
+        //     const fakeFile = new File([''], 'rrKdq0LetxgoUXF1nGxEQAO7RzNtDz0FoGx2wmue.png', { type: 'image/png' });
+        //     selectedFiles.items.add(fakeFile);
+        // });
+
         $(document).ready(function () {
             let selectedFiles = new DataTransfer();
+                @if(@$service->images)
+                @foreach($service->images as $image)
+                var image_url = '{{ asset('storage/'. $image->url) }}';
+                fetch(image_url).then(response=>response.blob()).then(blob=>{
+                    var filename = image_url.split('/').pop();
+                    var file = new File([blob], filename, {type: blob.type});
+                    selectedFiles.items.add(file);
+                    $('#file-input')[0].files = selectedFiles.files;
+                })
+                var img = $('<img>').attr('src', '{{ asset('storage/'. $image->url) }}').addClass('preview-image');
+            var removeLink = $('<span>').text('Remove Image').addClass('remove-image').data('index', 0); // Set index to 0 for first image
 
+            var previewDiv = $('<div>').addClass('preview-item').append(img).append(removeLink);
+            $('#previews').append(previewDiv);
+            @endforeach
+            @endif
             $('#file-input').on('change', function (event) {
                 const files = event.target.files;
-
                 // Loop through the selected files
                 for (let i = 0; i < files.length; i++) {
                     const fileIndex = selectedFiles.items.length; // Get the current length of selectedFiles
@@ -148,9 +164,9 @@
 
                     // Create a new FileReader to read and display the image
                     const reader = new FileReader();
-                    reader.onload = function (e) {
+                    reader.onload = function (event) {
                         // Create an image element with the file's data
-                        const img = $('<img>').attr('src', e.target.result).addClass('preview-image');
+                        const img = $('<img>').attr('src', event.target.result).addClass('preview-image');
                         // Create a remove link
                         const removeLink = $('<span>').text('Remove Image').addClass('remove-image').data('index', fileIndex);
 
@@ -166,7 +182,7 @@
             });
 
             // Event delegation for dynamically added "Remove Image" links
-            $('#previews').on('click', '.remove-image', function () {
+            $(document).on('click', '.remove-image', function () {
                 const fileIndex = $(this).data('index'); // Get the file index to remove
                 $(this).parent().remove(); // Remove the preview div
 

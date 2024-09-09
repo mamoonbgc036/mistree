@@ -161,12 +161,11 @@
                             @enderror
                         </div>
                     </div>
-
                     <div class="upload-container">
-                        <input type="file" id="file-input" name="images[]" accept="image/*" multiple />
                         <label for="file-input" class="upload-label">
                             <span>Drag & Drop images here or click to select</span>
                         </label>
+                        <input type="file" id="file-input" name="images[]" accept="image/*" multiple />
                         <div id="previews" class="preview-container"></div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-2">Create Service</button>

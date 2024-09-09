@@ -7,10 +7,11 @@
                 <h6 class="card-title text-center">Service Create</h6>
                 <form enctype="multipart/form-data" action="{{ route('service.edit', $service->id) }}" method="POST">
                     @csrf
+                    @method('PATCH')
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label">Service Name</label>
+                                <label class="form-label">ServiceSS Name</label>
                                 <input type="text" class="form-control" value="{{ $service->name }}"
                                     placeholder="Enter first name" name="name">
                                 @error('name')

@@ -35,7 +35,7 @@ Route::post('register', [RegisterController::class, 'store']);
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('', [DashboardController::class, 'index'])->name('dashboard');
 
-    //category http://127.0.0.1:8000/dashboard/service/create
+    //category http://127.0.0.1:8000/dashboard/service/create http://127.0.0.1:8000/dashboard/service/edit/15
     Route::get('category', [CategoryController::class, 'index'])->name('category');
     Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('category', [CategoryController::class, 'store']);
@@ -51,7 +51,5 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::post('service/create', [ServiceController::class, 'store']);
     Route::delete('service/{id}', [ServiceController::class, 'destroy'])->name('service.delete');
 
-
     Route::get('get-thanas/{id}', [ServiceAreaController::class, 'index'])->name('get-thana');
-
 });

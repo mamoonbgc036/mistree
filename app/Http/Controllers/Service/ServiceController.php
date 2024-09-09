@@ -71,10 +71,35 @@ class ServiceController extends Controller
 
     public function edit($id)
     {
-        $service = Service::findOrFail($id);
+        $service = Service::with('images')->findOrFail($id);
         $categories = ServiceCategory::all();
         $districts = District::all();
         return view('service.edit', compact('service', 'categories', 'districts'));
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        $request['user_id'] = auth()->id();
+        if ($request->status === 'busy') {
+            $request['start_date'] = DateTime::createFromFormat('d-M-Y', $request->start_date)->format('Y-m-d');
+        } else {
+            $request['start_date'] = now()->format('Y-m-d');
+        }
+        //create service
+        $service = Service::with('images')->findOrFail($id);
+        if ($request->hasFile('images')) {
+            $service->images()->delete();
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('service', 'public');
+                $service->images()->create([
+                    'url' => $path
+                ]);
+            }
+        }
+        $service->update($request->except(['_token', 'images', 'district_id', 'thana_id']));
+        $service->thana()->sync($request->thana_id);
+        return redirect()->route('service');
     }
 
     public function destroy($id)
