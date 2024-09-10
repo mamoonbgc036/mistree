@@ -17,7 +17,7 @@ class ServiceController extends Controller
 {
     public function index(Request $request)
     {
-        $services = Service::get();
+        $services = Service::where('user_id', auth()->user()->id)->get();
 
         if ($request->ajax()) {
             return DataTables::of($services)->addIndexColumn()
