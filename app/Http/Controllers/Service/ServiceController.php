@@ -43,7 +43,7 @@ class ServiceController extends Controller
         return view('service.create', compact('categories', 'districts'));
     }
 
-    public function store(Request $request)
+    public function store(ServiceStoreRequest $request)
     {
         $request['user_id'] = auth()->id();
         if ($request->status === 'busy') {
@@ -77,7 +77,7 @@ class ServiceController extends Controller
         return view('service.edit', compact('service', 'categories', 'districts'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ServiceStoreRequest $request, $id)
     {
 
         $request['user_id'] = auth()->id();

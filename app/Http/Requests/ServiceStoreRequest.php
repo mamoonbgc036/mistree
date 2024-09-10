@@ -27,10 +27,10 @@ class ServiceStoreRequest extends FormRequest
             "address" => ['required'],
             "charge" => ['required'],
             "category_id" => ['required'],
-            "district_id" => ['required'],
+            // "district_id" => ['required'],
             "thana_id.*" => ["required"],
             "status" => ['required'],
-            "image" => ['required'],
+            "images" => ['required'],
         ];
     }
 }
