@@ -18,6 +18,7 @@
                                 <th>Charge</th>
                                 <th>Mobile</th>
                                 <th>Address</th>
+                                <th>Is_Approved</th>
                                 <th>Status</th>
                                 <th>Free Date</th>
                                 <th>Action</th>
@@ -46,6 +47,7 @@
             { data: 'charge', name: 'charge' },
             { data: 'mobile', name: 'mobile' },
             { data: 'address', name: 'address' },
+            { data: 'is_approved', name: 'is_approved' },
             { data: 'status', name: 'status' },
             { data: 'start_date', name: 'start_date' },
             { data: 'action', name: 'action' },
@@ -87,4 +89,5 @@
         })
     });
 </script>
+
 @endsection

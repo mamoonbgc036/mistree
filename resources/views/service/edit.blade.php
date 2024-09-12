@@ -118,7 +118,7 @@
                                             </svg></span>
                                         <input type="text"
                                             class="form-control bg-transparent border-primary flatpickr-input"
-                                            placeholder="Select date" data-input="" readonly="readonly">
+                                            placeholder="Select date" name="start_date" data-input="" readonly="readonly">
                                     </div>
                                 </div>
                             </div>

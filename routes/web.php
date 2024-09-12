@@ -33,8 +33,7 @@ Route::post('register', [RegisterController::class, 'store']);
 
 
 Route::middleware(['auth'])->prefix('dashboard')->group(function () {
-    Route::get('', [DashboardController::class, 'index'])->name('dashboard');
-
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     //category http://127.0.0.1:8000/dashboard/service/create http://127.0.0.1:8000/dashboard/service/edit/15
     Route::get('category', [CategoryController::class, 'index'])->name('category');
     Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
@@ -50,6 +49,7 @@ Route::middleware(['auth'])->prefix('dashboard')->group(function () {
     Route::get('service/create', [ServiceController::class, 'create'])->name('service.create');
     Route::post('service/create', [ServiceController::class, 'store']);
     Route::delete('service/{id}', [ServiceController::class, 'destroy'])->name('service.delete');
+    Route::patch('service/approve/{id}', [ServiceController::class, 'approve_service'])->name('service-approve');
 
     Route::get('get-thanas/{id}', [ServiceAreaController::class, 'index'])->name('get-thana');
 });

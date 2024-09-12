@@ -54,6 +54,7 @@
                     </ul>
                 </div>
             </li>
+            @if(auth()->user()->type == 'admin')
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#category" role="button" aria-expanded="false"
                     aria-controls="category">
@@ -79,7 +80,7 @@
                     </ul>
                 </div>
             </li>
-
+            @endif
         </ul>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
             <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
