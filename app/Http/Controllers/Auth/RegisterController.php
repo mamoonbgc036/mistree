@@ -19,12 +19,12 @@ class RegisterController extends Controller
         $credentials = $request->validate([
             'name' => ['required'],
             'phone' => ['required', 'numeric'],
-            'type' => ['required'],
+            // 'type' => ['required'],
             'password' => ['required'],
         ]);
 
         $user = User::create($credentials);
         Auth::login($user);
-        return redirect()->route('dashboard')->with('success', 'Registerd Successfully');
+        return redirect()->route('service.create')->with('success', 'Registerd Successfully');
     }
 }

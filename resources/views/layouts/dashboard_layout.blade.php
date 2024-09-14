@@ -39,7 +39,7 @@
                         </path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
-                    <span class="link-title">Service</span>
+                    <span class="link-title">সেবা</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-chevron-down link-arrow">
@@ -49,7 +49,7 @@
                 <div class="collapse" id="emails">
                     <ul class="nav sub-menu">
                         <li class="nav-item">
-                            <a href="{{ route('service') }}" class="nav-link">All Services</a>
+                            <a href="{{ route('service') }}" class="nav-link">সকল সেবা</a>
                         </li>
                     </ul>
                 </div>

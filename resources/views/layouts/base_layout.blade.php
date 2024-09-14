@@ -39,6 +39,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
+
+        .login-back{
+            background: #cca879!important;
+        }
         .choices__inner {
             background-color: #0C1427 !important;
         }

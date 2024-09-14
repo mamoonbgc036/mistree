@@ -3,6 +3,7 @@
 use App\Http\Controllers\auth\RegisterController;
 use App\Http\Controllers\auth\SessionController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Service\CategoryController;
 use App\Http\Controllers\Service\ServiceAreaController;
 use App\Http\Controllers\Service\ServiceController;
@@ -19,11 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('sessions.login');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// http://127.0.0.1:8000/dashboard/service/create 
+// http://127.0.0.1:8000/dashboard/service/create dashboard/service/create
 
 Route::get('login', [SessionController::class, 'login'])->name('login');
 Route::post('login', [SessionController::class, 'store']);

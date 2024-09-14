@@ -22,7 +22,7 @@ class SessionController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard')->with('success', 'Credentials does\'t matched !');
+            return redirect()->route('service.create')->with('success', 'Credentials does\'t matched !');
         }
 
         return redirect()->back()->with('login_error', 'Credentials does\'t matched');
