@@ -29,7 +29,7 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">আপনার সেবার নাম</label>
-                                <input type="text" class="form-control" placeholder="Enter first name" name="name">
+                                <input type="text" class="form-control" placeholder="উদাহরণ: দরজা এবং জানালা মেরামত" name="name">
                                 @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -38,7 +38,7 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">আপনার মোবাইল নম্বর</label>
-                                <input type="text" class="form-control" placeholder="Enter your mobile no"
+                                <input type="text" class="form-control" placeholder=""
                                     name="mobile">
                                 @error('mobile')
                                 <p class="text-danger">{{ $message }}</p>
@@ -50,7 +50,7 @@
                         <div class="col-sm-6">
                             <div class="mb-3">
                                 <label class="form-label">আপনার/দোকানের ঠিকানা</label>
-                                <input type="text" class="form-control" placeholder="Enter first name" name="address">
+                                <input type="text" class="form-control" placeholder="উদাহরণ:আরিফ স্টোরে বা আরিফ মেস্ত্রী, মনোফকিরহাট" name="address">
                                 @error('address')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -58,8 +58,8 @@
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label"> রেইড/দাম</label>
-                                <input type="text" class="form-control" placeholder="Enter your mobile no"
+                                <label class="form-label">রেইড/দাম</label>
+                                <input type="text" class="form-control" placeholder="উদাহরণ:দৈনিক (৯৫০ টাকা )"
                                     name="charge">
                                 @error('charge')
                                 <p class="text-danger">{{ $message }}</p>
@@ -71,7 +71,7 @@
                         <div class="col-sm-12">
                             <div class="mb-3">
                                 <label class="form-label">আপনার সেবার বর্ণনা</label>
-                                <textarea name="description" id="" class="form-control" cols="30" rows="3"></textarea>
+                                <textarea name="description" id="" class="form-control" placeholder="উদাহরণ:সকল প্রকার ইলেকট্রিক কাজ যেমন ইলেকট্রিক ওয়ারিং, ফ্যান লাগানোর সেবা দেয়া হয়। আমাদের কাজের মান ভালো। আমার ওয়াদ বিস্বাসী এবং কাস্টমারের  সন্তষ্টি আমাদের প্রধান লক্ষ্য " cols="30" rows="3"></textarea>
                                 <!-- <textarea type="text" class="form-control" name="description"></textarea> -->
                                 @error('description')
                                 <p class="text-danger">{{ $message }}</p>
@@ -139,22 +139,21 @@
                         </div>
                     </div><!-- Row -->
                     <div class="row d-flex align-items-center my-2 justify-content-center">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <label for="example-multiselect">আপনার সেবার জেলা নির্ধারণ করুন:</label>
                             <select name="district_id" id="selected_district" class="mulplex form-control">
                                 <option value="" selected>Choices District</option>
                                 @foreach($districts as $district)
-                                <option value="{{ $district->districtid }}">{{ $district->districtnamebn }}</option>
+                                <option value="{{ $district->id }}">{{ $district->bn_name }}</option>
                                 @endforeach
                             </select>
                             @error('district_id')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror
                         </div>
-
                         <div class="col-md-6">
                             <label class="form-label">আপনার সেবার থানা নির্ধারণ করুন </label>
-                            <select name="thana_id[]" id="example-multiselect" multiple class="form-control">
+                            <select name="thana_id[]" id="example-multiselect" multiple class="form-control thane_append">
                             </select>
                             @error('thana_id')
                             <p class="text-danger">{{ $message }}</p>

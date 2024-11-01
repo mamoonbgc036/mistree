@@ -17,18 +17,11 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="userPassword" class="form-label text-info">পাসওয়ার্ড</label>
-                <input type="password" class="form-control" id="userPassword" autocomplete="current-password"
-                    placeholder="Password" name="password" />
+                <label for="userEmail" class="form-label text-info">আপনার পাসওয়ার্ড</label>
+                <input type="password" class="form-control" id="password" placeholder="password" name="password" />
                 @error('password')
                 <p class="text-danger">{{$message}}</p>
                 @enderror
-            </div>
-            <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="authCheck" />
-                <label class="form-check-label" for="authCheck">
-                    Remember me
-                </label>
             </div>
             <div>
                 <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">

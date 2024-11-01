@@ -15,6 +15,7 @@ class SessionController extends Controller
 
     public function store(Request $request)
     {
+        // 
         $credentials = $this->validate($request, [
             'phone' => ['required', 'numeric'],
             'password' => ['required']
@@ -24,9 +25,7 @@ class SessionController extends Controller
             $request->session()->regenerate();
             return redirect()->route('service.create')->with('success', 'Credentials does\'t matched !');
         }
-
         return redirect()->back()->with('login_error', 'Credentials does\'t matched');
-
     }
 
     public function logout(Request $request)

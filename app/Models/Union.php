@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Thana extends Model
+class Union extends Model
 {
     use HasFactory;
-    protected $table = 'thanas';
 
     public function services()
     {
-        return $this->belongsToMany(Service::class, 'service_thana');
+        return $this->belongsToMany(Service::class, 'service_union');
     }
 }

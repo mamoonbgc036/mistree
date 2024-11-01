@@ -4,16 +4,16 @@
     <div class="col-md-12 stretch-card">
         <div class="card">
             <div class="card-body">
-                <h6 class="card-title text-center">Service Create</h6>
+                <h6 class="card-title text-center">সেবার তথ্য পরিবর্তন করুন </h6>
                 <form enctype="multipart/form-data" action="{{ route('service.edit', $service->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label">ServiceSS Name</label>
+                                <label class="form-label">আপনার সেবার নাম</label>
                                 <input type="text" class="form-control" value="{{ $service->name }}"
-                                    placeholder="Enter first name" name="name">
+                                    placeholder="উদাহরণ: দরজা এবং জানালা মেরামত" name="name">
                                 @error('name')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -21,9 +21,9 @@
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label">Mobile</label>
+                                <label class="form-label">আপনার মোবাইল নম্বর</label>
                                 <input type="text" class="form-control" value="{{ $service->mobile }}"
-                                    placeholder="Enter your mobile no" name="mobile">
+                                    placeholder="" name="mobile">
                                 @error('mobile')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -33,9 +33,9 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label">Address</label>
+                                <label class="form-label">আপনার/দোকানের ঠিকানা</label>
                                 <input type="text" value="{{ $service->address }}" class="form-control"
-                                    placeholder="Enter first name" name="address">
+                                    placeholder="উদাহরণ:আরিফ স্টোরে বা আরিফ মেস্ত্রী, মনোফকিরহাট" name="address">
                                 @error('address')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -43,9 +43,9 @@
                         </div><!-- Col -->
                         <div class="col-sm-6">
                             <div class="mb-3">
-                                <label class="form-label">Charge</label>
+                                <label class="form-label">রেইড/দাম</label>
                                 <input type="text" value="{{ $service->charge }}" class="form-control"
-                                    placeholder="Enter your mobile no" name="charge">
+                                    placeholder="উদাহরণ:দৈনিক (৯৫০ টাকা )" name="charge">
                                 @error('charge')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -55,8 +55,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="mb-3">
-                                <label class="form-label">Description</label>
-                                <textarea name="description" id="" class="form-control" cols="30"
+                                <label class="form-label">আপনার সেবার বর্ণনা</label>
+                                <textarea name="description" id="" placeholder="উদাহরণ:আমাদের কাজের মান ভালো। আমার ওয়াদ বিস্বাসী এবং কাস্টমারের  সন্তষ্টি আমাদের প্রধান লক্ষ্য " class="form-control" cols="30"
                                     rows="3">{{ old('description', $service->description) }}</textarea>
                                 <!-- <textarea type="text" class="form-control" name="description"></textarea> -->
                                 @error('description')
@@ -67,7 +67,7 @@
                     </div><!-- Row -->
                     <div class="row d-flex align-items-center my-2 justify-content-center">
                         <div class="col-md-3">
-                            <label class="form-label">Service Category</label>
+                            <label class="form-label">আপনার সেবার ধারণ</label>
                             <select name="category_id" class="form-select form-select-sm mb-3">
                                 <option value="" selected="">Open this select menu</option>
                                 @foreach($categories as $categorie)
@@ -81,19 +81,19 @@
                         </div>
                         <div class="col-sm-3 align-items-center">
                             <div class=" d-flex flex-row">
-                                <label for="">Status :</label>
+                                <label for="">আপনি বর্তমান অবস্ত:</label>
                                 <div class="form-check form-check-inline">
                                     <input type="radio" class="form-check-input free" name="status" value="free"
                                         id="gender1" {{ $service->status == 'free' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="gender1">
-                                        Free
+                                        ফ্রী
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input type="radio" class="form-check-input busy" name="status" value="busy"
                                         id="gender2" {{ $service->status == 'busy' ? 'checked' : ''}}>
                                     <label class="form-check-label" for="gender2">
-                                        Busy
+                                        ব্যাস্ত 
                                     </label>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                         <div class="col-md-6 grid-margin stretch-card date_div" style="display: none;">
                             <div class="card">
                                 <div class="card-body">
-                                    <h6 class="card-title">When Free</h6>
+                                    <h6 class="card-title">সম্ভাব্য ফ্রি তারিখ</h6>
                                     <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
                                         <span class="input-group-text input-group-addon bg-transparent border-primary"
                                             data-toggle=""><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -126,11 +126,11 @@
                     </div><!-- Row -->
                     <div class="row d-flex align-items-center my-2 justify-content-center">
                         <div class="col-md-6">
-                            <label for="example-multiselect">Select Service District:</label>
+                            <label for="example-multiselect">আপনার সেবার জেলা নির্ধারণ করুন:</label>
                             <select name="district_id" id="selected_district" class="mulplex form-control">
                                 <option value="" selected>Choices District</option>
                                 @foreach($districts as $district)
-                                <option value="{{ $district->districtid }}">{{ $district->districtnamebn }}</option>
+                                <option value="{{ $district->id }}">{{ $district->bn_name }}</option>
                                 @endforeach
                             </select>
                             @error('district_id')
@@ -139,10 +139,10 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label class="form-label">Select Service Thana</label>
+                            <label class="form-label">আপনার সেবার থানা নির্ধারণ করুন</label>
                             <select name="thana_id[]" id="example-multiselect" multiple class="form-control">
-                                @foreach($service->thana as $than)
-                                <option value="{{ $than->id }}" selected>{{ $than->thananamebn }}</option>
+                                @foreach($service->thanas as $than)
+                                <option value="{{ $than->id }}" selected>{{ $than->bn_name }}</option>
                                 @endforeach
                             </select>
                             @error('thana_id')
@@ -153,11 +153,11 @@
                     <div class="upload-container">
                         <input type="file" id="file-input" name="images[]" accept="image/*" multiple />
                         <label for="file-input" class="upload-label">
-                            <span>Drag & Drop images here or click to select</span>
+                            <span>আপনার এবং আপনাদের কর্ম অবস্থা তোলা দুই বা ততোধিক ছবি দিন</span>
                         </label>
                         <div id="previews" class="preview-container"></div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-2">Create Category</button>
+                    <button type="submit" class="btn btn-primary mt-2">পরিবর্তন করুন</button>
                 </form>
 
             </div>

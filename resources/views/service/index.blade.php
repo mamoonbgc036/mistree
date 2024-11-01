@@ -5,23 +5,23 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h4 class="card-title">All Services</h4>
-                    <a href="{{ route('service.create') }}" class="btn btn-warning btn-sm text-white">Add Services</a>
+                    <h4 class="card-title">আপনার সকল সেবাসমূহ </h4>
+                    <a href="{{ route('service.create') }}" class="btn btn-warning btn-sm text-white">সেবা তৈরি করুন</a>
                 </div>
                 <div class="table-responsive pt-3">
                     <table class="table table-dark" id="service_table">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Charge</th>
-                                <th>Mobile</th>
-                                <th>Address</th>
-                                <th>Is_Approved</th>
-                                <th>Status</th>
-                                <th>Free Date</th>
-                                <th>Action</th>
+                                <th>নাম </th>
+                                <th>বর্ণনা </th>
+                                <th>দাম </th>
+                                <th>মোবাইল</th>
+                                <th> ঠিকানা </th>
+                                <th>অনুমোদন </th>
+                                <th>ব্যাস্ত/ফ্রি </th>
+                                <th>কাজ শুরু তারিখ </th>
+                                <th>অ্যাকশন</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,13 +61,14 @@
         let url = "{{ route('service.delete', ':id') }}";
         let service_del_url = url.replace(':id', id);
         Swal.fire({
-            title: 'Are you sure?',
+            title: 'আপনি কি সেবাটি মুছে ফেলতে চান?',
             icon: 'warning',
-            text: 'You would not be able revert back',
+            text: 'আপনি কিন্তু এটা ফেরত পাবেন না',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            cancelButtonText: 'না',
+            confirmButtonText: 'হ্যা মুছে ফেলতে চায়!'
         }).then(result => {
             if (result.isConfirmed) {
                 $.ajax({

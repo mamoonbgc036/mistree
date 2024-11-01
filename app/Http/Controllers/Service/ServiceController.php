@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Service;
 
-use App\Http\Requests\ServiceStoreRequest;
-use App\Models\District;
-use App\Models\Service;
-use App\Models\ServiceCategory;
-use App\Models\ServiceImage;
-use App\Models\Thana;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use DataTables;
 use DateTime;
+use DataTables;
+use App\Models\Order;
+use App\Models\Thana;
+use App\Models\Service;
+use App\Models\District;
+use App\Models\ServiceImage;
+use Illuminate\Http\Request;
+use App\Models\ServiceCategory;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ServiceStoreRequest;
+use Storage;
 
 class ServiceController extends Controller
 {
@@ -63,6 +66,26 @@ class ServiceController extends Controller
 
     public function create()
     {
+        // $result = Service::whereHas('images', function ($query) {
+        //     $query->where('service_id', 19);
+        // })->with('images')->get();
+
+        // $result = Service::whereHas('images', function ($query) {
+        //     $query->where('service_id', 19);
+        // })->with('images')->get();
+
+        // $result = Order::select('customer_id', DB::raw('SUM(amount) as total_amount'))
+        //     ->groupBy('customer_id')
+        //     ->having('total_amount', '>', 250)
+        //     ->get();
+
+        // $result = Order::sum('amount');
+
+        // $result = Order::where('amount', '>', 250)->avg('amount');
+
+        // $result = Order::whereBetween('amount', [150, 500])->get();
+
+        // dd($result);
         $categories = ServiceCategory::all();
         $districts = District::all();
         return view('service.create', compact('categories', 'districts'));
@@ -85,6 +108,7 @@ class ServiceController extends Controller
 
     public function store(ServiceStoreRequest $request)
     {
+        // dd($request->thana_id);
         $request['user_id'] = auth()->id();
         if ($request->status === 'busy') {
             $request['start_date'] = DateTime::createFromFormat('d-M-Y', $request->start_date)->format('Y-m-d');
@@ -95,16 +119,24 @@ class ServiceController extends Controller
         $service = Service::create($request->except(['_token', 'images', 'district_id', 'thana_id']));
 
         //insert service image
+        // foreach ($request->file('images') as $file) {
+        //     $path = $file->store('service', 'public');
+        //     $service->images()->create([
+        //         'url' => $path
+        //     ]);
+        // }
+
         foreach ($request->file('images') as $file) {
-            $path = $file->store('service', 'public');
+            $path = Storage::put('service', $file);
             $service->images()->create([
                 'url' => $path
             ]);
         }
 
+
         //insert service areas
         foreach ($request->thana_id as $thanaId) {
-            $service->thana()->attach($thanaId);
+            $service->thanas()->attach($thanaId);
         }
         return redirect()->route('service');
     }

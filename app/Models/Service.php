@@ -15,7 +15,7 @@ class Service extends Model
         return $this->hasMany(ServiceImage::class);
     }
 
-    public function thana()
+    public function thanas()
     {
         return $this->belongsToMany(Thana::class, 'service_thana');
     }

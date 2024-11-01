@@ -6,14 +6,6 @@
         <h5 class="text-warning fw-normal mb-4">একাউন্ট তৈরি করুন</h5>
         <form class="forms-sample" action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="mb-3">   
-                <label for="exampleInputUsername1" class="form-label text-info">আপনার নাম</label>
-                <input type="text" class="form-control" id="exampleInputUsername1" autocomplete="Username"
-                    placeholder="Your name" name="name" />
-                @error('name')
-                <p class="text-danger">{{ $message }}</p>
-                @enderror
-            </div>
             <div class="mb-3">
                 <label for="userEmail" class="form-label text-info">আপনার ফোন নম্বর</label>
                 <input type="text" class="form-control" id="userEmail" placeholder="Phone number" name="phone" />

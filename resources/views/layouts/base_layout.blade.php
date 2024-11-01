@@ -241,7 +241,7 @@
                 $('.date_div').css('display', 'none')
             })
 
-            var thanaSelect = new Choices('#example-multiselect', {
+            var unionSelect = new Choices('#example-multiselect', {
                 removeItemButton: true,
                 placeholderValue: 'Example placeholder',
                 searchPlaceholderValue: null,
@@ -251,19 +251,17 @@
 
             $('#selected_district').change(function () {
                 let district_id = $(this).val();
-                let url = "{{ route('get-thana', ':id') }}";
-                let thana_url = url.replace(':id', district_id);
-                let arry = [];
+                let url = "{{ route('get-thana', ':id') }}".replace(':id', district_id);
                 $.ajax({
-                    url: thana_url,
+                    url: url,
                     type: "GET",
                     success: function (data) {
                         // thanaSelect.clearStore();
-                        let choicesArray = data.map(thana => ({
-                            value: thana.id,
-                            label: thana.thananamebn
+                        let choicesArray = data.map(union => ({
+                            value: union.id,
+                            label: union.bn_name
                         }));
-                        thanaSelect.setChoices(choicesArray, 'value', 'label', true);
+                        unionSelect.setChoices(choicesArray, 'value', 'label', true);
                     },
                     error: function () {
                         console.error('Failed to fetch thanas.');
